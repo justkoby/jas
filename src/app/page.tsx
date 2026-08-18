@@ -7,6 +7,7 @@ import CategoryCard from "@/components/ui/CategoryCard";
 import ProductCarousel from "@/components/ui/ProductCarousel";
 import ProductGrid from "@/components/ui/ProductGrid";
 import NewsletterForm from "@/components/storefront/NewsletterForm";
+import HeroSlideshow from "@/components/storefront/HeroSlideshow";
 
 // Catalogue data is safe to cache briefly; admin changes will
 // appear within a minute until revalidatePath hooks land.
@@ -34,16 +35,10 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="flex flex-col w-full bg-brand-bg text-brand-charcoal overflow-hidden pb-12">
+    <div className="flex flex-col w-full bg-brand-bg text-brand-charcoal overflow-x-clip pb-12">
       {/* 1. Hero Section */}
-      <section className="relative w-full h-[80vh] md:h-[90vh] bg-brand-beige flex flex-col justify-end md:justify-center overflow-hidden border-b border-brand-border/30">
-        <Image
-          src="/placeholder.jpg"
-          alt="JAS Editorial Campaign"
-          fill
-          priority
-          className="object-cover object-[center_35%] filter brightness-[0.93]"
-        />
+      <section className="relative w-full -mt-16 md:-mt-20 h-[calc(80vh+4rem)] md:h-[calc(90vh+5rem)] bg-brand-beige flex flex-col justify-end md:justify-center overflow-hidden border-b border-brand-border/30">
+        <HeroSlideshow />
         {/* Soft bottom vignette overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/40 via-transparent to-brand-charcoal/10" />
 

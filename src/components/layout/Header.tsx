@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, Search, ShoppingBag, Heart, User } from "lucide-react";
 import { useUI } from "@/context/UIContext";
 import { useCart } from "@/context/CartContext";
@@ -12,6 +13,7 @@ export default function Header() {
   const { setMenuOpen, setSearchOpen, setCartOpen } = useUI();
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
+  const pathname = usePathname();
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -26,6 +28,13 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // White chrome while the transparent header floats over the home hero;
+  // charcoal everywhere else, and once the cream bar appears on scroll.
+  const overHero = pathname === "/" && !isSticky;
+  const tone = overHero
+    ? "text-white hover:text-brand-beige"
+    : "text-brand-charcoal hover:text-brand-burgundy";
+
   return (
     <>
       {/* Spacer to prevent page content jump when header becomes fixed */}
@@ -34,14 +43,14 @@ export default function Header() {
         className={`w-full z-30 transition-all duration-300 ${
           isSticky
             ? "fixed top-0 bg-brand-bg/85 backdrop-blur-md border-b border-brand-border shadow-sm"
-            : "relative bg-brand-bg border-b border-brand-border/40"
+            : "relative bg-transparent border-b border-transparent"
         }`}
       >
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
         {/* Mobile Left: Menu Icon */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="md:hidden p-2 text-brand-charcoal hover:text-brand-burgundy transition-colors"
+          className={`md:hidden p-2 transition-colors ${tone}`}
           aria-label="Open menu"
         >
           <Menu className="h-6 w-6" />
@@ -56,7 +65,9 @@ export default function Header() {
                 alt="JAS Logo"
                 fill
                 priority
-                className="object-contain"
+                className={`object-contain transition-all duration-300 ${
+                  overHero ? "brightness-0 invert" : ""
+                }`}
                 onError={(e) => {
                   // If logo is not found or fails to render, display a wordmark
                   const target = e.target as HTMLElement;
@@ -65,7 +76,7 @@ export default function Header() {
               />
             </div>
             {/* Fallback Wordmark style */}
-            <span className="hidden md:hidden font-serif font-black text-2xl tracking-widest text-brand-charcoal select-none">
+            <span className={`hidden md:hidden font-serif font-black text-2xl tracking-widest select-none ${tone}`}>
               JAS
             </span>
           </Link>
@@ -73,25 +84,32 @@ export default function Header() {
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 font-sans text-[11px] font-semibold uppercase tracking-widest">
-          <Link href="/shop?new=true" className="text-brand-charcoal hover:text-brand-burgundy transition-colors">
+          <Link href="/shop?new=true" className={`transition-colors ${tone}`}>
             New Arrivals
           </Link>
-          <Link href="/category/clothing" className="text-brand-charcoal hover:text-brand-burgundy transition-colors">
+          <Link href="/category/clothing" className={`transition-colors ${tone}`}>
             Clothing
           </Link>
-          <Link href="/category/shoes" className="text-brand-charcoal hover:text-brand-burgundy transition-colors">
+          <Link href="/category/shoes" className={`transition-colors ${tone}`}>
             Shoes
           </Link>
-          <Link href="/category/bags-accessories" className="text-brand-charcoal hover:text-brand-burgundy transition-colors">
+          <Link href="/category/bags-accessories" className={`transition-colors ${tone}`}>
             Bags & Accessories
           </Link>
-          <Link href="/category/beauty-fragrance" className="text-brand-charcoal hover:text-brand-burgundy transition-colors">
+          <Link href="/category/beauty-fragrance" className={`transition-colors ${tone}`}>
             Beauty & Fragrance
           </Link>
-          <Link href="/category/home-living" className="text-brand-charcoal hover:text-brand-burgundy transition-colors">
+          <Link href="/category/home-living" className={`transition-colors ${tone}`}>
             Home & Living
           </Link>
-          <Link href="/category/sale" className="text-brand-burgundy font-bold hover:text-brand-rose transition-colors">
+          <Link
+            href="/category/sale"
+            className={`font-bold transition-colors ${
+              overHero
+                ? "text-brand-beige hover:text-white"
+                : "text-brand-burgundy hover:text-brand-rose"
+            }`}
+          >
             Sale
           </Link>
         </nav>
@@ -101,7 +119,7 @@ export default function Header() {
           {/* Search Icon */}
           <button
             onClick={() => setSearchOpen(true)}
-            className="p-2 text-brand-charcoal hover:text-brand-burgundy transition-colors"
+            className={`p-2 transition-colors ${tone}`}
             aria-label="Search"
           >
             <Search className="h-5 w-5 md:h-5 md:w-5" />
@@ -110,7 +128,7 @@ export default function Header() {
           {/* Account Icon (Desktop only) */}
           <Link
             href="/account"
-            className="hidden md:block p-2 text-brand-charcoal hover:text-brand-burgundy transition-colors"
+            className={`hidden md:block p-2 transition-colors ${tone}`}
             aria-label="Account"
           >
             <User className="h-5 w-5" />
@@ -119,7 +137,7 @@ export default function Header() {
           {/* Wishlist Icon (Desktop only) */}
           <Link
             href="/wishlist"
-            className="hidden md:block p-2 text-brand-charcoal hover:text-brand-burgundy transition-colors relative"
+            className={`hidden md:block p-2 transition-colors relative ${tone}`}
             aria-label="Wishlist"
           >
             <Heart className="h-5 w-5" />
@@ -133,7 +151,7 @@ export default function Header() {
           {/* Shopping Bag Icon */}
           <button
             onClick={() => setCartOpen(true)}
-            className="p-2 text-brand-charcoal hover:text-brand-burgundy transition-colors relative"
+            className={`p-2 transition-colors relative ${tone}`}
             aria-label="Shopping Bag"
           >
             <ShoppingBag className="h-5 w-5 md:h-5 md:w-5" />

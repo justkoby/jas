@@ -28,6 +28,7 @@ const sansFont = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "JAS | Style your life.",
   description: "Discover fashion, fragrance, beauty and living essentials selected to make every day feel more like you. Curated multi-category lifestyle boutique based in Ghana.",
+  icons: [{ url: "/favicon.png", type: "image/png" }],
 };
 
 export const viewport = {
