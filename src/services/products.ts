@@ -353,7 +353,7 @@ export async function getFeaturedProducts(limit = 8): Promise<Product[]> {
 }
 
 export async function getNewArrivals(limit = 8): Promise<Product[]> {
-  const products = await getProducts({ isNew: true });
+  const products = await getProducts({ isNew: true, sortBy: "newest" });
   return products.slice(0, limit);
 }
 

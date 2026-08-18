@@ -5,11 +5,12 @@ import { usePathname } from "next/navigation";
 import AnnouncementBar from "./AnnouncementBar";
 import Header from "./Header";
 import Footer from "./Footer";
-import MobileBottomNav from "./MobileBottomNav";
 
 /**
- * Storefront chrome (announcement bar, header, footer, mobile nav).
+ * Storefront chrome (announcement bar, header, footer).
  * Hidden inside the /admin area, which has its own shell.
+ * The mobile bottom nav is intentionally not rendered for now —
+ * re-add <MobileBottomNav /> here (plus main padding) to bring it back.
  */
 export default function StorefrontChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -23,9 +24,8 @@ export default function StorefrontChrome({ children }: { children: ReactNode }) 
     <>
       <AnnouncementBar />
       <Header />
-      <main className="flex-grow pb-16 md:pb-0">{children}</main>
+      <main className="flex-grow">{children}</main>
       <Footer />
-      <MobileBottomNav />
     </>
   );
 }
