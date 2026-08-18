@@ -14,10 +14,10 @@ import HeroSlideshow from "@/components/storefront/HeroSlideshow";
 export const revalidate = 60;
 
 const categories = [
-  { name: "Clothing", slug: "clothing", image: "/placeholder.jpg" },
-  { name: "Shoes", slug: "shoes", image: "/placeholder.jpg" },
-  { name: "Bags & Accessories", slug: "bags-accessories", image: "/placeholder.jpg" },
-  { name: "Beauty & Fragrance", slug: "beauty-fragrance", image: "/placeholder.jpg" },
+  { name: "Clothing", slug: "clothing", image: "/clothing.png" },
+  { name: "Shoes", slug: "shoes", image: "/shoes.jpg" },
+  { name: "Bags & Accessories", slug: "bags-accessories", image: "/bags-accessories.jpg" },
+  { name: "Beauty & Fragrance", slug: "beauty-fragrance", image: "/beauty-fragrance.png" },
   { name: "Home & Living", slug: "home-living", image: "/placeholder.jpg" },
 ];
 

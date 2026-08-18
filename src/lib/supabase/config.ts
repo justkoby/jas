@@ -20,5 +20,7 @@ export function isSupabaseConfigured(): boolean {
 
 /** Builds the public CDN URL for a storage object. */
 export function publicStorageUrl(bucket: string, path: string): string {
+  // Site-local assets (e.g. "/shoes.jpg" from /public) pass through untouched.
+  if (path.startsWith("/")) return path;
   return `${supabaseUrl}/storage/v1/object/public/${bucket}/${path}`;
 }
