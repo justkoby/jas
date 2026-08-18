@@ -27,13 +27,16 @@ export default function Header() {
   }, []);
 
   return (
-    <header
-      className={`w-full z-30 transition-all duration-300 ${
-        isSticky
-          ? "fixed top-0 bg-brand-bg/85 backdrop-blur-md border-b border-brand-border shadow-sm"
-          : "relative bg-brand-bg border-b border-brand-border/40"
-      }`}
-    >
+    <>
+      {/* Spacer to prevent page content jump when header becomes fixed */}
+      {isSticky && <div className="h-16 md:h-20" />}
+      <header
+        className={`w-full z-30 transition-all duration-300 ${
+          isSticky
+            ? "fixed top-0 bg-brand-bg/85 backdrop-blur-md border-b border-brand-border shadow-sm"
+            : "relative bg-brand-bg border-b border-brand-border/40"
+        }`}
+      >
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
         {/* Mobile Left: Menu Icon */}
         <button
@@ -142,8 +145,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      {/* Spacer to prevent page content jump when header becomes sticky */}
-      {isSticky && <div className="h-16 md:h-20" />}
-    </header>
+      </header>
+    </>
   );
 }

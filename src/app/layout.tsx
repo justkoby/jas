@@ -5,10 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { UIProvider } from "@/context/UIContext";
 
-import AnnouncementBar from "@/components/layout/AnnouncementBar";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import StorefrontChrome from "@/components/layout/StorefrontChrome";
 import MobileMenuDrawer from "@/components/layout/MobileMenuDrawer";
 import CartDrawer from "@/components/layout/CartDrawer";
 import SearchOverlay from "@/components/layout/SearchOverlay";
@@ -51,12 +48,8 @@ export default function RootLayout({
         <UIProvider>
           <CartProvider>
             <WishlistProvider>
-              <AnnouncementBar />
-              <Header />
-              <main className="flex-grow pb-16 md:pb-0">{children}</main>
-              <Footer />
-              <MobileBottomNav />
-              
+              <StorefrontChrome>{children}</StorefrontChrome>
+
               {/* Overlays, Drawers & Portals */}
               <MobileMenuDrawer />
               <CartDrawer />

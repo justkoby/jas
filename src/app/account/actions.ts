@@ -14,6 +14,7 @@ import {
 export interface ActionResult {
   error?: string;
   message?: string;
+  role?: string;
 }
 
 const GENERIC_AUTH_ERROR =
@@ -60,14 +61,25 @@ export async function signIn(formData: FormData): Promise<ActionResult> {
   }
 
   const supabase = createClient();
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
 
   if (error) {
     return { error: friendlyAuthError(error) };
   }
 
+  // Let the login page route staff straight to the dashboard.
+  let role: string | undefined;
+  if (data.user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", data.user.id)
+      .maybeSingle();
+    role = profile?.role;
+  }
+
   revalidatePath("/", "layout");
-  return { message: "Signed in successfully." };
+  return { message: "Signed in successfully.", role };
 }
 
 export async function signUp(formData: FormData): Promise<ActionResult> {

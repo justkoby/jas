@@ -113,7 +113,7 @@ export default function SearchOverlay() {
   if (!isSearchOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-brand-bg/98 z-50 overflow-y-auto flex flex-col transition-all duration-300">
+    <div className="fixed inset-0 bg-brand-bg/[0.98] z-50 overflow-y-auto flex flex-col transition-all duration-300">
       {/* Header */}
       <div className="max-w-7xl mx-auto w-full px-4 py-6 md:py-8 flex justify-between items-center border-b border-brand-border">
         <form

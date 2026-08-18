@@ -1,15 +1,27 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { Suspense, useState, useTransition } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUI } from "@/context/UIContext";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { signIn } from "../actions";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  // Only allow same-site relative destinations.
+  const rawNext = searchParams.get("next") ?? "";
+  const next = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "";
   const { showToast } = useUI();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +40,10 @@ export default function LoginPage() {
         return;
       }
       showToast("Successfully signed in!");
-      router.push("/account");
+      const staffRoles = ["staff", "admin", "super_admin"];
+      const destination =
+        next || (result.role && staffRoles.includes(result.role) ? "/admin" : "/account");
+      router.push(destination);
       router.refresh();
     });
   };
