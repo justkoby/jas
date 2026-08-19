@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts",
-    "add-products": "tsx scripts/add-products.ts"
+    "add-products": "tsx scripts/add-products.ts",
+    "add-gloss": "tsx scripts/add-gloss.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

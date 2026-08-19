@@ -80,7 +80,7 @@ export default function MobileMenuDrawer() {
             <span className="font-serif text-sm italic text-brand-taupe block mb-4">Style your life.</span>
             <div className="flex justify-center gap-6">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/jasmiine.sss/"
                 target="_blank"
                 rel="noreferrer"
                 className="text-brand-taupe hover:text-brand-burgundy transition-colors"
@@ -92,7 +92,7 @@ export default function MobileMenuDrawer() {
                 </svg>
               </a>
               <a
-                href="https://wa.me/233000000000"
+                href="https://wa.me/233598010104"
                 target="_blank"
                 rel="noreferrer"
                 className="text-brand-taupe hover:text-brand-burgundy transition-colors"

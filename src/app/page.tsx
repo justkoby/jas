@@ -6,7 +6,7 @@ import { getFeaturedProducts, getNewArrivals } from "@/services/products";
 import CategoryCard from "@/components/ui/CategoryCard";
 import ProductCarousel from "@/components/ui/ProductCarousel";
 import ProductGrid from "@/components/ui/ProductGrid";
-import NewsletterForm from "@/components/storefront/NewsletterForm";
+import CuratedSlideshow from "@/components/storefront/CuratedSlideshow";
 import HeroSlideshow from "@/components/storefront/HeroSlideshow";
 
 // Catalogue data is safe to cache briefly; admin changes will
@@ -18,14 +18,21 @@ const categories = [
   { name: "Shoes", slug: "shoes", image: "/shoes.jpg" },
   { name: "Bags & Accessories", slug: "bags-accessories", image: "/bags-accessories.jpg" },
   { name: "Beauty & Fragrance", slug: "beauty-fragrance", image: "/beauty-fragrance.png" },
-  { name: "Home & Living", slug: "home-living", image: "/placeholder.jpg" },
+  { name: "Home & Living", slug: "home-living", image: "/image-12.jpg" },
 ];
 
 const moodCards = [
-  { title: "Everyday Essentials", tag: "everyday", desc: "Uniforms for ease" },
-  { title: "Soft & Feminine", tag: "feminine", desc: "Delicate details" },
-  { title: "Evening Edit", tag: "evening", desc: "Dressed for dusk" },
-  { title: "Home Refresh", tag: "home", desc: "Thoughtful objects" },
+  { title: "Everyday Essentials", tag: "everyday", desc: "Uniforms for ease", image: "/image-17.jpg" },
+  { title: "Soft & Feminine", tag: "feminine", desc: "Delicate details", image: "/image-16.jpg" },
+  { title: "Evening Edit", tag: "evening", desc: "Dressed for dusk", image: "/image-6.jpg" },
+  { title: "Home Refresh", tag: "home", desc: "Thoughtful objects", image: "/placeholder.jpg" },
+];
+
+const instagramPosts = [
+  { src: "/instagram/insta-1.jpg", href: "https://www.instagram.com/jasmiine.sss/p/DYHl_4oDTAb/" },
+  { src: "/instagram/insta-2.jpg", href: "https://www.instagram.com/jasmiine.sss/p/DM7XEJDoxEA/" },
+  { src: "/instagram/insta-3.jpg", href: "https://www.instagram.com/jasmiine.sss/p/DTIAn9ljbFO/" },
+  { src: "/instagram/insta-4.jpg", href: "https://www.instagram.com/jasmiine.sss/p/DTFg8RKDTFT/" },
 ];
 
 export default async function HomePage() {
@@ -150,12 +157,7 @@ export default async function HomePage() {
 
           {/* Image Area */}
           <div className="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:h-[450px] relative order-1 md:order-2">
-            <Image
-              src="/placeholder.jpg"
-              alt="JAS Curated Lifestyle"
-              fill
-              className="object-cover"
-            />
+            <CuratedSlideshow />
           </div>
         </div>
       </section>
@@ -178,7 +180,7 @@ export default async function HomePage() {
               className="group relative aspect-square bg-brand-beige border border-brand-border/40 rounded-md overflow-hidden shadow-card flex flex-col justify-end p-5 md:p-6"
             >
               <Image
-                src="/placeholder.jpg"
+                src={mood.image}
                 alt={mood.title}
                 fill
                 className="object-cover filter grayscale contrast-110 brightness-[0.85] transition-transform duration-700 ease-out group-hover:scale-105"
@@ -228,25 +230,33 @@ export default async function HomePage() {
       {/* 7. Lifestyle/Instagram Gallery */}
       <section className="max-w-7xl mx-auto w-full px-4 md:px-6 pt-20 md:pt-28">
         <div className="text-center mb-8 md:mb-10">
-          <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-taupe block mb-1">
-            @shopjas
-          </span>
+          <a
+            href="https://www.instagram.com/jasmiine.sss/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-taupe hover:text-brand-burgundy transition-colors block mb-1"
+          >
+            @jasmiine.sss
+          </a>
           <h2 className="font-serif text-2xl md:text-3xl font-light mb-1">The JAS Life</h2>
           <p className="font-sans text-xs md:text-sm text-brand-taupe">
-            Wear it. Style it. Live it. Tag @shopjas to be featured.
+            Wear it. Style it. Live it. Follow @jasmiine.sss for more.
           </p>
         </div>
 
-        {/* Horizontal scroll on mobile, 6 column row on desktop */}
-        <div className="flex gap-3.5 overflow-x-auto no-scrollbar snap-x snap-mandatory md:grid md:grid-cols-6 pb-4">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="w-[150px] sm:w-[180px] md:w-auto flex-shrink-0 aspect-square relative bg-brand-beige border border-brand-border/40 rounded overflow-hidden snap-start group shadow-sm"
+        {/* Horizontal scroll on mobile, 4 column row on desktop */}
+        <div className="flex gap-3.5 overflow-x-auto no-scrollbar snap-x snap-mandatory md:grid md:grid-cols-4 pb-4">
+          {instagramPosts.map((post, i) => (
+            <a
+              key={post.src}
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-[150px] sm:w-[180px] md:w-auto flex-shrink-0 aspect-square relative bg-brand-beige border border-brand-border/40 rounded overflow-hidden snap-start group shadow-sm block"
             >
               <Image
-                src="/placeholder.jpg"
-                alt={`Instagram Feature ${i + 1}`}
+                src={post.src}
+                alt={`Instagram feature ${i + 1} from @jasmiine.sss`}
                 fill
                 className="object-cover transition-all duration-500 group-hover:scale-102"
               />
@@ -257,28 +267,8 @@ export default async function HomePage() {
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
               </div>
-            </div>
+            </a>
           ))}
-        </div>
-      </section>
-
-      {/* 8. Newsletter Section */}
-      <section className="max-w-3xl mx-auto w-full px-4 pt-20 md:pt-28 pb-4">
-        <div className="bg-brand-beige/50 border border-brand-border rounded-lg p-8 md:p-12 text-center shadow-card flex flex-col items-center">
-          <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-burgundy block mb-2">
-            Stay Connected
-          </span>
-          <h2 className="font-serif text-2xl md:text-3xl font-light mb-2 text-brand-charcoal">
-            Join the JAS List
-          </h2>
-          <p className="font-sans text-sm text-brand-taupe max-w-md mb-8 leading-relaxed">
-            Be first to discover new arrivals, private offers and beautifully curated finds.
-          </p>
-
-          <NewsletterForm />
-          <p className="font-sans text-[10px] text-brand-taupe/70 mt-4 leading-relaxed max-w-sm">
-            By subscribing, you agree to receive communications from JAS. You can unsubscribe at any time.
-          </p>
         </div>
       </section>
     </div>

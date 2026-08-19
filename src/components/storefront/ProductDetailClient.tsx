@@ -21,7 +21,7 @@ import QuantitySelector from "@/components/ui/QuantitySelector";
 import ColorSelector from "@/components/ui/ColorSelector";
 import SizeSelector from "@/components/ui/SizeSelector";
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "233500000000";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "233598010104";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 
 interface ProductDetailClientProps {

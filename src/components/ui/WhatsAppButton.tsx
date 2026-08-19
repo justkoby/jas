@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
 }
 
 export default function WhatsAppButton({ productName, sku }: WhatsAppButtonProps) {
-  const phoneNumber = "233500000000"; // Ghanaian phone number placeholder
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "233598010104";
   
   const getWhatsAppLink = () => {
     let message = "Hi JAS, I am browsing your online store and would like to make an enquiry.";

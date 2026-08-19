@@ -6,6 +6,7 @@ import { Smartphone, MessageSquare } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "233598010104";
 
   const footerLinks = {
     shop: [
@@ -46,13 +47,13 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/jasmiine.sss/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-white border border-brand-border text-brand-taupe hover:text-brand-burgundy transition-colors hover:scale-105"
                 aria-label="Instagram"
               >
-                <svg className="h-4.5 w-4.5 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -66,18 +67,18 @@ export default function Footer() {
                 aria-label="TikTok"
               >
                 {/* Custom TikTok Icon */}
-                <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
                   <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.58 4.22.94 1.15 2.23 1.94 3.66 2.24v3.85a9.38 9.38 0 0 1-5.13-1.63v7.4c.03 2.1-.63 4.23-1.99 5.8a8.2 8.2 0 0 1-6.19 3.06c-2.3.06-4.63-.74-6.3-2.31A8.93 8.93 0 0 1 .46 16.4c-.06-2.54 1.05-5.07 2.94-6.73a8.87 8.87 0 0 1 7.23-1.78v3.98a4.92 4.92 0 0 0-3.3 1.83c-.93 1.16-1.25 2.76-.84 4.19.4 1.34 1.48 2.45 2.85 2.8 1.54.43 3.29-.02 4.34-1.2.66-.75.98-1.75.96-2.75V.02Z" />
                 </svg>
               </a>
               <a
-                href="https://wa.me/233500000000"
+                href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-white border border-brand-border text-brand-taupe hover:text-brand-burgundy transition-colors hover:scale-105"
                 aria-label="WhatsApp"
               >
-                <MessageSquare className="h-4.5 w-4.5" />
+                <MessageSquare className="h-4 w-4" />
               </a>
             </div>
           </div>

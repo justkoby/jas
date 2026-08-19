@@ -10,6 +10,8 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 type CheckoutStep = "contact" | "delivery" | "address" | "payment" | "review" | "success";
 
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "233598010104";
+
 export default function CheckoutPage() {
   const { cartItems, cartSubtotal, isFreeDelivery, clearCart } = useCart();
   const { showToast } = useUI();
@@ -743,10 +745,10 @@ export default function CheckoutPage() {
                 Need Urgent Assistance?
               </h3>
               <p>📍 Shop Location: East Legon, Boundary Road, Accra, Ghana.</p>
-              <p>📞 Phone Line: +233 50 123 4567</p>
+              <p>📞 Phone Line: +233 59 801 0104</p>
               <p>💬 WhatsApp: Chat directly to send rider / inquire about pickups.</p>
               <a
-                href={`https://wa.me/233500000000?text=${encodeURIComponent(
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                   `Hi JAS! My order number is ${orderNumber}. I would like to schedule a pickup / delivery check.`
                 )}`}
                 target="_blank"
