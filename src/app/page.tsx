@@ -28,6 +28,13 @@ const moodCards = [
   { title: "Home Refresh", tag: "home", desc: "Thoughtful objects", image: "/placeholder.jpg" },
 ];
 
+const lovedMedia: { type: "video" | "image"; src: string; alt: string }[] = [
+  { type: "video", src: "/video-1.mp4", alt: "JAS styles in motion" },
+  { type: "image", src: "/image-18.jpg", alt: "JAS community favourite" },
+  { type: "video", src: "/video-3.mp4", alt: "JAS styles in motion" },
+  { type: "video", src: "/video-4.mp4", alt: "JAS styles in motion" },
+];
+
 const instagramPosts = [
   { src: "/instagram/insta-1.jpg", href: "https://www.instagram.com/jasmiine.sss/p/DYHl_4oDTAb/" },
   { src: "/instagram/insta-2.jpg", href: "https://www.instagram.com/jasmiine.sss/p/DM7XEJDoxEA/" },
@@ -133,9 +140,9 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* 4. Editorial Promotional Split Banner */}
-      <section className="max-w-7xl mx-auto w-full px-4 md:px-6 pt-24 md:pt-32">
-        <div className="bg-white rounded-lg border border-brand-border/40 overflow-hidden flex flex-col md:flex-row shadow-card">
+      {/* 4. Editorial Promotional Split Banner (full-bleed) */}
+      <section className="w-full pt-24 md:pt-32">
+        <div className="bg-white overflow-hidden flex flex-col md:flex-row">
           {/* Content Area */}
           <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center gap-4 md:gap-5 bg-brand-beige/20 order-2 md:order-1">
             <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-burgundy">
@@ -214,6 +221,30 @@ export default async function HomePage() {
           >
             View Bestsellers <ArrowRight className="h-4 w-4" />
           </Link>
+        </div>
+
+        {/* Community media strip */}
+        <div className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory md:grid md:grid-cols-4 md:overflow-visible pb-4 mb-8 md:mb-10">
+          {lovedMedia.map((media) => (
+            <div
+              key={media.src}
+              className="w-[180px] sm:w-[220px] md:w-auto flex-shrink-0 snap-start aspect-[4/5] relative bg-brand-beige border border-brand-border/40 rounded-md overflow-hidden shadow-card"
+            >
+              {media.type === "video" ? (
+                <video
+                  src={media.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-label={media.alt}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <Image src={media.src} alt={media.alt} fill className="object-cover" />
+              )}
+            </div>
+          ))}
         </div>
 
         {trendingProducts.length > 0 ? (
